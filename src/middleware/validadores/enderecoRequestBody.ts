@@ -1,20 +1,18 @@
 import * as yup from "yup";
-import { TipoRequestBodyAdotante } from "../../tipos/tiposAdotante";
 import { NextFunction, Request, Response } from "express";
+import EnderecoEntity from "../../entities/Endereco";
 
-const esquemaBodyAdotante: yup.ObjectSchema<
-  Omit<TipoRequestBodyAdotante, "endereco">
+const esquemaBoEndereco: yup.ObjectSchema<
+  Omit<EnderecoEntity, "id">
 > = yup.object({
-  nome: yup.string().defined().required(),
-  celular: yup.string().defined().required(),
-  senha: yup.string().defined().required().min(6),
-  foto: yup.string().optional(),
+  cidade: yup.string().defined().required(),
+  estado: yup.string().defined().required(),
 });
 
 
-const middlewareValidadorBodyAdotante = async (req: Request, res: Response, next: NextFunction) => {
+const middlewareValidadorBodyEndereco = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        await esquemaBodyAdotante.validate(req.body, {
+        await esquemaBoEndereco.validate(req.body, {
         abortEarly: false
         });
         return next();
@@ -31,4 +29,4 @@ const middlewareValidadorBodyAdotante = async (req: Request, res: Response, next
       }
 };
 
-export {middlewareValidadorBodyAdotante};
+export {middlewareValidadorBodyEndereco};
