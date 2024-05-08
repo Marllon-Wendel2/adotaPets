@@ -29,6 +29,7 @@ export default class AdotanteEntity {
   })
   @JoinColumn()
   endereco?: EnderecoEntity;
+
   @OneToMany(() => PetEntity, (pet) => pet.adotante)
   pets!: PetEntity[];
 

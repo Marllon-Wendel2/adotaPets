@@ -1,22 +1,20 @@
 import { NextFunction, Request, Response } from "express";
-import * yup from "yup"
+import * as yup from "yup"
 import { TipoRequestBodyAdotante } from "../../tipos/tiposRequestBodyAdotante";
 
-const esquemaBodyAdotante:  yup. ObjectSchema<Omit<TipoRequestBodyAdotante, "endereco">>=yup.object({
-    nome:yup.string().defined().required(),
-    celular:yup.string().defined().required(),
-    senha:yup.string().defined().required().min(6),
-    foto:yup.string().optional(),
-  });
+const esquemaBodyAdotante: yup.ObjectSchema<Omit<TipoRequestBodyAdotante, "endereco">> = yup.object({
+  nome: yup.string().defined().required(),
+  celular: yup.string().defined().required(),
+  senha: yup.string().defined().required().min(6),
+  foto: yup.string().optional(),
+})
 
-const middleware:validador = async (req: Request, res: Response, next: NextFunction) => {
+const middlewareValidadorBodyAdotante = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        await esq.validate(req.body, {
+        await esquemaBodyAdotante.validate(req.body, {
         abortEarly: false
         });
-        try {
-            abort
-        }
+        return next();
       } catch(error) {
         const yupErrors = error as yup.ValidationError;
   
@@ -28,4 +26,6 @@ const middleware:validador = async (req: Request, res: Response, next: NextFunct
         });
         return res.status(400).json(valdationErrors)
       }
-}
+};
+
+export {middlewareValidadorBodyAdotante};
