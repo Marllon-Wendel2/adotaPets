@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import AdotanteEntity from "../entities/AdotanteEntity";
 import AdotanteRepository from "../repositories/AdotanteRepository";
 import EnderecoEntity from "../entities/Endereco";
-import * as yup from "yup";
 import {
   TipoRequestBodyAdotante,
   TipoRequestParamsAdotante,
